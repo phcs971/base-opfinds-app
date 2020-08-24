@@ -5,5 +5,5 @@ import 'utils/constants.dart';
 //TODO Theme Data
 final ThemeData themeData = ThemeData(
   primaryColor: primaryColor,
-  accentColor: secondaryColor,
+  backgroundColor: backgroundColor,
 );

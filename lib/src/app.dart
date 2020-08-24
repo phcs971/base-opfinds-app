@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 
-import 'utils/logger.dart';
+import 'package:device_preview/device_preview.dart';
+
+import 'utils/utils.dart';
 import 'routes.dart';
 import 'locators.dart';
 import 'styles.dart';
 
-final _log = Logger(printer: CustomPrinter('App'));
-
-//TODO App Class Name
-class AgathaApp extends StatelessWidget {
+//TODO App Name
+class APPNAME_App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    _log.v("App (Re)Loaded");
+    log.v("<App> (Re)Loaded");
     return MaterialApp(
-      title: 'Agatha',
+      title: longAppName,
       theme: themeData,
-      initialRoute: StartUpRoute,
+      initialRoute: HomeRoute,
       onGenerateRoute: onGenerateRoute,
+      locale: DevicePreview.of(context).locale,
+      builder: DevicePreview.appBuilder,
       navigatorKey: locator<NavigationService>().navigatorKey,
       debugShowCheckedModeBanner: false,
     );

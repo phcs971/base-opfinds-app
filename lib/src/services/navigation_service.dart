@@ -3,11 +3,11 @@ import 'package:flutter/widgets.dart';
 class NavigationService {
   final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
-  Future<dynamic> push(String routeName) {
-    return navigatorKey.currentState.pushNamed(routeName);
-  }
+  Future<dynamic> to(String routeName, [dynamic arguments]) =>
+      navigatorKey.currentState.pushReplacementNamed(routeName, arguments: arguments);
 
-  void pop(dynamic result) {
-    return navigatorKey.currentState.pop(result);
-  }
+  Future<dynamic> push(String routeName, [dynamic arguments]) =>
+      navigatorKey.currentState.pushNamed(routeName, arguments: arguments);
+
+  void pop(dynamic result) => navigatorKey.currentState.pop(result);
 }

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
-//TODO: Cores do App
-const primaryColor = Colors.red;
-const secondaryColor = Colors.redAccent;
+//TODO App Colors
+const primaryColor = Color(0xFF0388D2); //    #0388D2
+const backgroundColor = Color(0xFFF6F6F6); // #F6F6F6
+
+//TODO App Name
+const String longAppName = 'App Exemplo';
+const String shortAppName = 'AE';

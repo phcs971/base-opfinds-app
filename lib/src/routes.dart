@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'utils/logger.dart';
+import 'pages/home/home.dart';
+import 'pages/startup/startup.dart';
 
-const StartUpRoute = '/start';
+//TODO ROUTES
 const HomeRoute = '/';
-const LoginRoute = '/login';
-
-final _log = Logger(printer: CustomPrinter('Router'));
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   Route<dynamic> _page(Widget widget) => MaterialPageRoute(
@@ -14,15 +13,11 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
         settings: settings,
       );
 
-  _log.i('Routing to ${settings.name}');
+  log.i('<Router> To ${settings.name}');
 
   switch (settings.name) {
-    case StartUpRoute: // TODO StartUp
-      return _page(Container());
-    case HomeRoute: //TODO Home
-      return _page(Container());
-    case LoginRoute: //TODO Login
-      return _page(Container());
+    case HomeRoute:
+      return _page(HomePage());
     default: //TODO On Unknown Route
       return _page(Container());
   }

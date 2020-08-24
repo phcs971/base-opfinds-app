@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-enum DeviceScreenType { Desktop, Tablet, Mobile }
+enum DeviceType { Desktop, Tablet, Mobile }
 
 class SizingInformation {
   final Orientation orientation;
-  final DeviceScreenType deviceType;
+  final DeviceType deviceType;
   final Size screenSize, localWidgetSize;
 
   SizingInformation({
@@ -19,18 +19,11 @@ class ResponsiveBuilder extends StatelessWidget {
   final Widget Function(BuildContext, SizingInformation) builder;
   const ResponsiveBuilder(this.builder);
 
-  DeviceScreenType getDeviceType(MediaQueryData mq) {
+  DeviceType getDeviceType(MediaQueryData mq) {
     final deviceWidth = mq.size.shortestSide;
-
-    if (deviceWidth > 950) {
-      return DeviceScreenType.Desktop;
-    }
-
-    if (deviceWidth > 600) {
-      return DeviceScreenType.Tablet;
-    }
-
-    return DeviceScreenType.Mobile;
+    if (deviceWidth > 950) return DeviceType.Desktop;
+    if (deviceWidth > 600) return DeviceType.Tablet;
+    return DeviceType.Mobile;
   }
 
   @override
@@ -51,16 +44,17 @@ class ResponsiveBuilder extends StatelessWidget {
 }
 
 class ScreenTypeLayout extends StatelessWidget {
-  final Widget mobile, watch, tablet, desktop;
+  final Function(BuildContext, SizingInformation) mobile, tablet, desktop;
 
-  const ScreenTypeLayout({@required this.mobile, this.tablet, this.desktop, this.watch});
+  const ScreenTypeLayout({@required this.mobile, this.tablet, this.desktop});
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveBuilder((context, inf) {
-      if (inf.deviceType == DeviceScreenType.Tablet) return tablet ?? mobile;
-      if (inf.deviceType == DeviceScreenType.Desktop) return desktop ?? tablet ?? mobile;
-      return mobile;
+    return ResponsiveBuilder((c, i) {
+      if (i.deviceType == DeviceType.Tablet) return tablet != null ? tablet(c, i) : mobile(c, i);
+      if (i.deviceType == DeviceType.Desktop)
+        return desktop != null ? desktop(c, i) : tablet != null ? tablet(c, i) : mobile(c, i);
+      return mobile(c, i);
     });
   }
 }

@@ -1,17 +1,24 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:device_preview/device_preview.dart';
 
 import 'src/app.dart';
 import 'src/locators.dart';
 import 'src/utils/logger.dart';
 
-final _log = Logger(printer: CustomPrinter('Main'));
 void main() async {
-  _log.v("Start");
+  log.v("<Main> Start");
 
-  _log.v("Locator Setup - Start");
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIOverlays([]);
+
+  log.v("<Main> Locator Setup - Start");
   await locatorSetup();
-  _log.v("Locator Setup - Finish");
+  log.v("<Main> Locator Setup - Finish");
 
-  _log.v("Run App");
-  runApp(AgathaApp());
+  log.v("<Main> Run App");
+
+  runApp(DevicePreview(enabled: false, builder: (context) => )); //TODO App 
 }

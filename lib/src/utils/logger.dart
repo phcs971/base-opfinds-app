@@ -1,11 +1,12 @@
 export 'package:logger/logger.dart';
 import 'package:logger/logger.dart';
 
+final log = Logger(
+  printer: CustomPrinter(),
+  level: Level.verbose,
+);
+
 class CustomPrinter extends LogPrinter {
-  final String className;
-
-  CustomPrinter(this.className);
-
   @override
   List<String> log(LogEvent event) {
     var color = {
@@ -24,6 +25,6 @@ class CustomPrinter extends LogPrinter {
       Level.error: "[ERR!]",
       Level.wtf: "[WTF!]",
     }[event.level];
-    return [color('$prefix <$className> ${event.message}')];
+    return [color('$prefix ${event.message}')];
   }
 }
