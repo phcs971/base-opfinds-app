@@ -20,5 +20,6 @@ void main() async {
 
   log.v("<Main> Run App");
 
-  runApp(DevicePreview(enabled: false, builder: (context) => )); //TODO App 
+  runApp(
+      DevicePreview(enabled: kDebugMode && true, builder: (context) => APPNAME_App())); //TODO App
 }
