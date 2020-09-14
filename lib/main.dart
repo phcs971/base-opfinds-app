@@ -12,7 +12,7 @@ void main() async {
   log.v("<Main> Start");
 
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIOverlays([]);
+  // SystemChrome.setEnabledSystemUIOverlays([]); TODO
 
   log.v("<Main> Locator Setup - Start");
   await locatorSetup();
